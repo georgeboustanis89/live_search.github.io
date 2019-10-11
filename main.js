@@ -2,13 +2,13 @@ function display(myReg){
     let output = '';
     var regex = new RegExp(myReg,'igm');
     var xhr = new XMLHttpRequest();
-    xhr.open('GET','data.json',true);
+    xhr.open('GET','hymns.json',true);
     xhr.onload = function(){
         if(this.status == 200){
             let jsonObj = JSON.parse(xhr.responseText);
             jsonObj.forEach(element => {
                 if(element.name.match(regex))
-                    output += element.name+'<br>';
+                    output += element.lyrics+'<hr><br>';
             });
         }
         document.getElementById('result').innerHTML = output;
