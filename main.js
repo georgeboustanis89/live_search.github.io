@@ -5,12 +5,11 @@ function display(myReg){
     xhr.open('GET','data.json',true);
     xhr.onload = function(){
         if(this.status == 200){
-            let resp = xhr.responseText.match(regex);
-            if(resp){
-                resp.forEach(function(str){
-                    output += str+'<br>';
-                });
-            }
+            let jsonObj = JSON.parse(xhr.responseText);
+            jsonObj.forEach(element => {
+                if(element.name.match(regex))
+                    output += element.name+'<br>';
+            });
         }
         document.getElementById('result').innerHTML = output;
     }
