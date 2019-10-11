@@ -8,7 +8,7 @@ function display(myReg){
             let jsonObj = JSON.parse(xhr.responseText);
             jsonObj.forEach(element => {
                 if(element.lyrics.match(regex) || element.name.match(regex))
-                    output += '<hr><b>' + element.name + '</b><br>' + element.lyrics+'<br>';
+                    output += '<hr><b style="color:black;">' + element.name + '</b><br>' + element.lyrics+'<br>';
             });
         }
         document.getElementById('result').innerHTML = output;
