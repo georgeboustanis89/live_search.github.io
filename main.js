@@ -7,8 +7,8 @@ function display(myReg){
         if(this.status == 200){
             let jsonObj = JSON.parse(xhr.responseText);
             jsonObj.forEach(element => {
-                if(element.name.match(regex))
-                    output += element.lyrics+'<hr><br>';
+                if(element.lyrics.match(regex) || element.name.match(regex))
+                    output += '<hr><b>' + element.name + '</b><br>' + element.lyrics+'<br>';
             });
         }
         document.getElementById('result').innerHTML = output;
@@ -25,5 +25,5 @@ function search(){
     display(myReg);
 }
 
-display('^.*[^\n]');
+//display('^.*[^\n]');
 document.getElementById('button').addEventListener('click',search);
