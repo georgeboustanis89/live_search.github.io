@@ -1,7 +1,7 @@
 function showContents(){
     let xhr = new XMLHttpRequest();
 
-    xhr.open('GET','./data.json');
+    xhr.open('GET','data.json');
 
     xhr.send();
 
@@ -10,24 +10,36 @@ function showContents(){
     xhr.onload = function(){
         if(this.status == 200){
             let jArr = JSON.parse(this.responseText);
-            for(let i=0;i<jArr.length;i++)
-                out += `<button class="hymn-button" onclick="showHymn('${jArr[i].title[0]}')">${jArr[i].title}</button>`
+            for(let i=0;i<jArr.length;i++){
+                let number = giveNumber(jArr[i].title);
+                out += `<button class="hymn-button" onclick="topFunction();showHymn('${number}')">${jArr[i].title}</button>`
+            }
             document.getElementsByClassName("content")[0].innerHTML = out;
         }
     }
 }
 
-function showHymn(title){
+
+function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+
+function giveNumber(title){
+    return title.split('.')[0];
+}
+
+function showHymn(number){
     let xhr = new XMLHttpRequest();
 
-    xhr.open('GET','./data.json');
+    xhr.open('GET','data.json');
 
     xhr.send();
 
     xhr.onload = function(){
         if(this.status == 200){
             let jArr = JSON.parse(this.responseText);
-        document.getElementsByClassName('content')[0].innerHTML = `<div style="text-align: center; font-size:2em; color:white; background-color: lightblue" class="hymn-title">${jArr[title-1].title}</div><br><div style="font-size: 1.2em;" class="hymn-lyrics">${jArr[title-1].lyrics}</div>`;
+        document.getElementsByClassName('content')[0].innerHTML = `<div style="text-align: center; font-size:2em; color:white; background-color: lightblue" class="hymn-title">${jArr[number-1].title}</div><br><div style="font-size: 1.2em;" class="hymn-lyrics">${jArr[number-1].lyrics}</div>`;
         }
     }    
 }
