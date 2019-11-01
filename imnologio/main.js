@@ -1,7 +1,7 @@
 function showContents(){
     let xhr = new XMLHttpRequest();
 
-    xhr.open('GET','data.json');
+    xhr.open('GET','./data.json');
 
     xhr.send();
 
@@ -20,7 +20,7 @@ function showContents(){
 function showHymn(title){
     let xhr = new XMLHttpRequest();
 
-    xhr.open('GET','data.json');
+    xhr.open('GET','./data.json');
 
     xhr.send();
 
