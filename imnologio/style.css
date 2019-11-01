@@ -39,13 +39,10 @@ a{
 }
 
 .content{
-<<<<<<< HEAD
-=======
     /*
     height:500px;
     overflow-y: scroll;
     */
->>>>>>> 069f7be2e6edfc13bc0e94b1641df2da80b26e8d
     margin-top: 3em;
     display: flex;
     flex-direction: column;
