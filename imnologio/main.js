@@ -71,6 +71,7 @@ function display(myReg){
 function search(){
     let searchtxt = document.getElementsByClassName('header-search')[0].value;
     let myReg = '\\b.*'+searchtxt+'.*'; //ΠΡΟΣΟΧΗ ΠΡΕΠΕΙ ΝΑ ΦΙΛΤΡΑΡΩ ΤΑ ΔΕΔΟΜΕΝΑ ΑΠΟ ΤΟ TEXT AREA - ΝΑ ΜΗΝ ΕΙΝΑΙ ΚΕΝΟ!
+    console.log(myReg);
     display(myReg);
 }
 
