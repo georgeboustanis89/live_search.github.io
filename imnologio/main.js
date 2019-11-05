@@ -1,7 +1,7 @@
 function sendRequest(filePath,onLoadFun,...params){
     let xhr = new XMLHttpRequest();
 
-    xhr.open('GET',filePath);
+    xhr.open('GET',filePath,true);
 
     xhr.send();
 
@@ -22,6 +22,10 @@ function showAllHymns(dataArr){
     document.getElementsByClassName('content')[0].innerHTML = out;
 }
 
+function showHymn(dataArr,number){
+    document.getElementsByClassName('content')[0].innerHTML = `<div style="text-align: center; font-size:2em; color:white; background-color: lightblue" class="hymn-title">${dataArr[number-1].title}</div><br><div style="font-size: 1.2em;" class="hymn-lyrics">${dataArr[number-1].lyrics}</div>`;
+}
+
 function makeHymnButton(number,title){
     return `<button class="hymn-button" onClick="topFunction(); sendRequest('./data.json',showHymn,${number});">${title}</div>`;
 }
@@ -35,46 +39,23 @@ function getNumber(title){
     return title.split('.')[0];
 }
 
-function showHymn(dataArr,number){
-    document.getElementsByClassName('content')[0].innerHTML = `<div style="text-align: center; font-size:2em; color:white; background-color: lightblue" class="hymn-title">${dataArr[number-1].title}</div><br><div style="font-size: 1.2em;" class="hymn-lyrics">${dataArr[number-1].lyrics}</div>`;
-}
 
-
-
-function display(myReg){
-    let output = '';
-    var regex = new RegExp(myReg,'igm');
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET','./data.json',true);
-    xhr.onload = function(){
-        if(this.status == 200){
-            let jArr = JSON.parse(xhr.responseText);
-            jArr.forEach(element => {
-                if(element.lyrics.match(regex) || element.title.match(regex)){
-                    let number = giveNumber(element.title);
-                    output += `<button class="hymn-button" onclick="topFunction();showHymn('${number}')">${element.title}</button>`;
-                }
-            });
-        }
-        document.getElementsByClassName('content')[0].innerHTML = output;
-    }
-
-    xhr.send();
-}
-
-
-function search(){
+function searchHymn(dataArr){
     let searchtxt = document.getElementsByClassName('header-search')[0].value;
-    let myReg = '\\b.*'+searchtxt+'.*'; //ΠΡΟΣΟΧΗ ΠΡΕΠΕΙ ΝΑ ΦΙΛΤΡΑΡΩ ΤΑ ΔΕΔΟΜΕΝΑ ΑΠΟ ΤΟ TEXT AREA - ΝΑ ΜΗΝ ΕΙΝΑΙ ΚΕΝΟ!
-    display(myReg);
+    let myReg = new RegExp(searchtxt,'igm');
+    let out = "";
+    dataArr.forEach(element => {
+        if(element.lyrics.match(myReg) || element.title.match(myReg)){
+            let number = getNumber(element.title);
+            out += makeHymnButton(number,element.title);
+        }
+    });
+    if(out !== "")
+        document.getElementsByClassName('content')[0].innerHTML = out;
+    else{
+        alert('ΔΕΝ ΒΡΕΘΗΚΕ!');
+    }
 }
-
-//display('^.*[^\n]');
-// document.getElementById('button').addEventListener('click',search);
-
-
-
-
 
 
 function init(){
