@@ -1,31 +1,37 @@
-function showContents(){
+function sendRequest(filePath,onLoadFun){
     let xhr = new XMLHttpRequest();
 
-    xhr.open('GET','data.json');
+    xhr.open('GET',filePath);
 
     xhr.send();
-
-    let out = "";
 
     xhr.onload = function(){
         if(this.status == 200){
             let jArr = JSON.parse(this.responseText);
-            for(let i=0;i<jArr.length;i++){
-                let number = giveNumber(jArr[i].title);
-                out += `<button class="hymn-button" onclick="topFunction();showHymn('${number}')">${jArr[i].title}</button>`;
-            }
-            document.getElementsByClassName("content")[0].innerHTML = out;
+            onLoadFun(jArr);
         }
     }
 }
 
+function showAllHymns(dataArr){
+    let out = "";
+    dataArr.forEach(element =>{
+        let number = getNumber(element.title);
+        out += makeHymnButton(number,element.title);
+    });
+    document.getElementsByClassName('content')[0].innerHTML = out;
+}
+
+function makeHymnButton(number,title){
+    return `<button class="hymn-button" onClick="topFunction(); showHymn('${number}');">${title}</div>`;
+}
 
 function topFunction() {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 
-function giveNumber(title){
+function getNumber(title){
     return title.split('.')[0];
 }
 
