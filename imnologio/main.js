@@ -1,4 +1,4 @@
-function sendRequest(filePath,onLoadFun){
+function sendRequest(filePath,onLoadFun,...params){
     let xhr = new XMLHttpRequest();
 
     xhr.open('GET',filePath);
@@ -8,7 +8,7 @@ function sendRequest(filePath,onLoadFun){
     xhr.onload = function(){
         if(this.status == 200){
             let jArr = JSON.parse(this.responseText);
-            onLoadFun(jArr);
+            onLoadFun(jArr,params);
         }
     }
 }
@@ -23,7 +23,7 @@ function showAllHymns(dataArr){
 }
 
 function makeHymnButton(number,title){
-    return `<button class="hymn-button" onClick="topFunction(); showHymn('${number}');">${title}</div>`;
+    return `<button class="hymn-button" onClick="topFunction(); sendRequest('./data.json',showHymn,${number});">${title}</div>`;
 }
 
 function topFunction() {
@@ -35,19 +35,8 @@ function getNumber(title){
     return title.split('.')[0];
 }
 
-function showHymn(number){
-    let xhr = new XMLHttpRequest();
-
-    xhr.open('GET','data.json');
-
-    xhr.send();
-
-    xhr.onload = function(){
-        if(this.status == 200){
-            let jArr = JSON.parse(this.responseText);
-            document.getElementsByClassName('content')[0].innerHTML = `<div style="text-align: center; font-size:2em; color:white; background-color: lightblue" class="hymn-title">${jArr[number-1].title}</div><br><div style="font-size: 1.2em;" class="hymn-lyrics">${jArr[number-1].lyrics}</div>`;
-        }
-    }    
+function showHymn(dataArr,number){
+    document.getElementsByClassName('content')[0].innerHTML = `<div style="text-align: center; font-size:2em; color:white; background-color: lightblue" class="hymn-title">${dataArr[number-1].title}</div><br><div style="font-size: 1.2em;" class="hymn-lyrics">${dataArr[number-1].lyrics}</div>`;
 }
 
 
