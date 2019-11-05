@@ -1,0 +1,11 @@
+1.
+main.js
+Πρεπει να φτιαξω τον μηχανισμο ετσι ωστε να υπαρχει μια function για rendering που θα παιρνει ως πρωτη παραμετρο το id ή το class του html container του οποιου θελω να αλλαξω τα περιεχομενα και σαν δευτερη, ενα string που θα εχει τα data
+
+π.χ. render("0.content","<button class='hymn-button'>${title}"</button>");
+το οποιο θα εχει ως αποτελεσμα την εκτελεση του
+document.getElementsByClassName('content')[0].innerHTML = "<button class='hymn-button'>${title}"</button>";
+
+π.χ. render("#search-header","Hello<br>There");
+το οποιο θα εχει ως αποτελεσμα την εκτελεση του
+document.getElementById('search-header').innerHTML = "Hello<br>There";
