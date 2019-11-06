@@ -1,11 +1,12 @@
-1.
-main.js
-Πρεπει να φτιαξω τον μηχανισμο ετσι ωστε να υπαρχει μια function για rendering που θα παιρνει ως πρωτη παραμετρο το id ή το class του html container του οποιου θελω να αλλαξω τα περιεχομενα και σαν δευτερη, ενα string που θα εχει τα data
+branch chords
+Σε αυτο το branch θα δουλεψουμε πανω στις συγχορδιες και συγκεκριμενα πριν το merge με το master branch θα πρεπει να:
 
-π.χ. render("0.content","<button class='hymn-button'>${title}"</button>");
-το οποιο θα εχει ως αποτελεσμα την εκτελεση του
-document.getElementsByClassName('content')[0].innerHTML = "<button class='hymn-button'>${title}"</button>";
+1. γραφτει μια ειδικη σελιδα ετσι ωστε να μπορει να γινει copy paste των lyrics μαζι με τις συγχορδιες και στη συνεχεια να περαστουν στο json file
 
-π.χ. render("#search-header","Hello<br>There");
-το οποιο θα εχει ως αποτελεσμα την εκτελεση του
-document.getElementById('search-header').innerHTML = "Hello<br>There";
+2. τροποποιησω το data.json ετσι ωστε να υπαρχουν και οι συγχορδιες για καθε υμνο
+
+3. φαινονται οι συγχορδιες στο index.html πανω απο τα lyrics του καθε υμνου
+
+4. προστεθει μηχανισμος ετσι ωστε να γινεται transpose των συγχορδιων
+
+ΚΑΙ ΒΛΕΠΟΥΜΕ....
